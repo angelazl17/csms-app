@@ -1,13 +1,13 @@
 import { useState } from 'react'
-import Login from './components/Login'
-import MainPage from './components/MainPage'
+import Login from './components/Login.tsx'
+import MainPage from './components/MainPage.tsx'
 import './App.css'
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
-  const [username, setUsername] = useState('')
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false)
+  const [username, setUsername] = useState<string>('')
 
-  const handleLogin = (user) => {
+  const handleLogin = (user: string) => {
     setUsername(user)
     setIsAuthenticated(true)
   }

@@ -1,9 +1,21 @@
 import { useState } from 'react'
 
-function MainPage({ username, onLogout }) {
-  const [selectedMenu, setSelectedMenu] = useState('dashboard')
+interface MainPageProps {
+  username: string
+  onLogout: () => void
+}
 
-  const menuItems = [
+type MenuId = 'dashboard' | 'users' | 'settings' | 'reports'
+
+interface MenuItem {
+  id: MenuId
+  label: string
+}
+
+function MainPage({ username, onLogout }: MainPageProps) {
+  const [selectedMenu, setSelectedMenu] = useState<MenuId>('dashboard')
+
+  const menuItems: MenuItem[] = [
     { id: 'dashboard', label: 'Dashboard' },
     { id: 'users', label: 'Users' },
     { id: 'settings', label: 'Settings' },

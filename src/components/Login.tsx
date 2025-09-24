@@ -1,11 +1,15 @@
 import { useState } from 'react'
 
-function Login({ onLogin }) {
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
-  const [error, setError] = useState('')
+interface LoginProps {
+  onLogin: (username: string) => void
+}
 
-  const handleSubmit = (e) => {
+function Login({ onLogin }: LoginProps) {
+  const [username, setUsername] = useState<string>('')
+  const [password, setPassword] = useState<string>('')
+  const [error, setError] = useState<string>('')
+
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
 
     if (!username || !password) {
