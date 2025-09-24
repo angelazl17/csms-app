@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import Login from './components/Login.tsx'
-import MainPage from './components/MainPage.tsx'
+import {Login} from './modules/auth'
+import {Home} from './modules/home'
 import './App.css'
 
 function App() {
@@ -20,7 +20,7 @@ function App() {
   return (
     <div className="app">
       {isAuthenticated ? (
-        <MainPage username={username} onLogout={handleLogout} />
+        <Home username={username} onLogout={handleLogout} />
       ) : (
         <Login onLogin={handleLogin} />
       )}
