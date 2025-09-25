@@ -3,26 +3,29 @@ export type MenuId = 'dashboard' | 'products' | 'settings' | 'reports' | 'parts'
 export interface SubMenuItem {
   id: MenuId
   label: string
+  path: string
 }
 
 export interface MenuItem {
   id: MenuId
   label: string
+  path: string
   subItems?: SubMenuItem[]
 }
 
 export const MENU_ITEMS: MenuItem[] = [
-  { id: 'dashboard', label: 'Dashboard' },
+  { id: 'dashboard', label: 'Dashboard', path: '/dashboard' },
   {
     id: 'products',
     label: 'Products',
+    path: '/products',
     subItems: [
-      { id: 'parts', label: 'Parts' },
-      { id: 'lessons', label: 'Lessons' }
+      { id: 'parts', label: 'Parts', path: '/products/parts' },
+      { id: 'lessons', label: 'Lessons', path: '/products/lessons' }
     ]
   },
-  { id: 'settings', label: 'Settings' },
-  { id: 'reports', label: 'Reports' }
+  { id: 'settings', label: 'Settings', path: '/settings' },
+  { id: 'reports', label: 'Reports', path: '/reports' }
 ]
 
 

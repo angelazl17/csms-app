@@ -1,48 +1,41 @@
-import { useState } from 'react'
-import { MenuId,  MENU_ITEMS } from '../../shared/constants'
+import { useState, ReactNode } from 'react'
+import { useNavigate, useLocation } from 'react-router-dom'
+import { MenuId, MENU_ITEMS } from '../../shared/constants'
 
 interface HomeProps {
   username: string
   onLogout: () => void
+  children: ReactNode
 }
 
-function Home({ username, onLogout }: HomeProps) {
-  const [selectedMenu, setSelectedMenu] = useState<MenuId>('dashboard')
+function Home({ username, onLogout, children }: HomeProps) {
+  const navigate = useNavigate()
+  const location = useLocation()
   const [openDropdown, setOpenDropdown] = useState<MenuId | null>(null)
 
   const menuItems = MENU_ITEMS
 
-  const handleMenuClick = (menuId: MenuId, hasSubItems: boolean) => {
+  const isActiveRoute = (path: string, subItems?: any[]) => {
+    if (location.pathname === path) return true
+    if (subItems) {
+      return subItems.some(item => location.pathname === item.path)
+    }
+    return false
+  }
+
+  const handleMenuClick = (path: string, hasSubItems: boolean) => {
     if (hasSubItems) {
+      const menuId = menuItems.find(item => item.path === path)?.id
       setOpenDropdown(openDropdown === menuId ? null : menuId)
     } else {
-      setSelectedMenu(menuId)
+      navigate(path)
       setOpenDropdown(null)
     }
   }
 
-  const handleSubMenuClick = (menuId: MenuId) => {
-    setSelectedMenu(menuId)
+  const handleSubMenuClick = (path: string) => {
+    navigate(path)
     setOpenDropdown(null)
-  }
-
-  const renderContent = () => {
-    switch (selectedMenu) {
-      case 'dashboard':
-        return <div className="content">Welcome to Dashboard</div>
-      case 'products':
-        return <div className="content">Products Overview</div>
-      case 'parts':
-        return <div className="content">Parts Management</div>
-      case 'lessons':
-        return <div className="content">Lessons Management</div>
-      case 'settings':
-        return <div className="content">System Settings</div>
-      case 'reports':
-        return <div className="content">Reports & Analytics</div>
-      default:
-        return <div className="content">Welcome</div>
-    }
   }
 
   return (
@@ -54,12 +47,9 @@ function Home({ username, onLogout }: HomeProps) {
               <div key={item.id} className="menu-item-container">
                 <button
                   className={`menu-item ${
-                    selectedMenu === item.id ||
-                    (item.subItems && item.subItems.some(sub => sub.id === selectedMenu))
-                      ? 'active'
-                      : ''
+                    isActiveRoute(item.path, item.subItems) ? 'active' : ''
                   }`}
-                  onClick={() => handleMenuClick(item.id, !!item.subItems)}
+                  onClick={() => handleMenuClick(item.path, !!item.subItems)}
                 >
                   {item.label}
                   {item.subItems && (
@@ -74,8 +64,8 @@ function Home({ username, onLogout }: HomeProps) {
                     {item.subItems.map((subItem) => (
                       <button
                         key={subItem.id}
-                        className={`dropdown-item ${selectedMenu === subItem.id ? 'active' : ''}`}
-                        onClick={() => handleSubMenuClick(subItem.id)}
+                        className={`dropdown-item ${location.pathname === subItem.path ? 'active' : ''}`}
+                        onClick={() => handleSubMenuClick(subItem.path)}
                       >
                         {subItem.label}
                       </button>
@@ -96,7 +86,7 @@ function Home({ username, onLogout }: HomeProps) {
       </header>
 
       <main className="main-content">
-        {renderContent()}
+        {children}
       </main>
     </div>
   )

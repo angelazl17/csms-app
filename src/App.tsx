@@ -1,6 +1,8 @@
 import { useState } from 'react'
-import {Login} from './modules/auth'
-import {Home} from './modules/home'
+import { BrowserRouter } from 'react-router-dom'
+import { Login } from './modules/auth'
+import { Home } from './modules/home'
+import { AppRouter } from './core/router'
 import './App.css'
 
 function App() {
@@ -18,13 +20,17 @@ function App() {
   }
 
   return (
-    <div className="app">
-      {isAuthenticated ? (
-        <Home username={username} onLogout={handleLogout} />
-      ) : (
-        <Login onLogin={handleLogin} />
-      )}
-    </div>
+    <BrowserRouter>
+      <div className="app">
+        {isAuthenticated ? (
+          <Home username={username} onLogout={handleLogout}>
+            <AppRouter isAuthenticated={isAuthenticated} />
+          </Home>
+        ) : (
+          <Login onLogin={handleLogin} />
+        )}
+      </div>
+    </BrowserRouter>
   )
 }
 
