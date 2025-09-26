@@ -8,7 +8,6 @@ export interface RouteConfig {
 
 export type RoutePaths = {
   LOGIN: '/'
-  HOME:'/home',
   DASHBOARD: '/dashboard'
   PRODUCTS: '/products'
   PARTS: '/products/parts'

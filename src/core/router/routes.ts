@@ -2,7 +2,6 @@ import { RouteConfig, RoutePaths } from './types'
 
 export const ROUTE_PATHS: RoutePaths = {
   LOGIN: '/',
-  Home: '/home',
   DASHBOARD: '/dashboard',
   PRODUCTS: '/products',
   PARTS: '/products/parts',
