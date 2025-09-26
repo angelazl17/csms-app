@@ -25,7 +25,7 @@ function Home({ username, onLogout, children }: HomeProps) {
 
   const handleMenuClick = (path: string, hasSubItems: boolean) => {
     if (hasSubItems) {
-      const menuId = menuItems.find(item => item.path === path)?.id
+      const menuId = menuItems.find(item => item.path === path)?.id ?? null
       setOpenDropdown(openDropdown === menuId ? null : menuId)
     } else {
       navigate(path)
