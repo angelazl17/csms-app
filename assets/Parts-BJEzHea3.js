@@ -1,0 +1,1 @@
+import{j as a}from"./index-CtOiq0nk.js";function r(){return a.jsxs("div",{className:"content",children:[a.jsx("h2",{children:"Parts Management"}),a.jsx("p",{children:"Manage your parts inventory, add new parts, and track part availability."})]})}export{r as default};

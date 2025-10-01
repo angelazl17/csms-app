@@ -1,0 +1,1 @@
+import{j as s}from"./index-CtOiq0nk.js";function t(){return s.jsxs("div",{className:"content",children:[s.jsx("h2",{children:"Products"}),s.jsx("p",{children:"Products overview page. Use the menu to navigate to Parts or Lessons."})]})}export{t as default};

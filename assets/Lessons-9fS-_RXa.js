@@ -1,0 +1,1 @@
+import{j as s}from"./index-CtOiq0nk.js";function e(){return s.jsxs("div",{className:"content",children:[s.jsx("h2",{children:"Lessons Management"}),s.jsx("p",{children:"Create and manage training lessons, assign instructors, and track progress."})]})}export{e as default};
